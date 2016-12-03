@@ -1,3 +1,20 @@
+Description of the Three's Company problem:
+http://hssl.cs.jhu.edu/wiki/doku.php?id=randal:teach:cs420:project_3_2015
+In brief:
+The Problem: Three's Company
+
+This assignment is a social network version of the triangle counting problem, which has become an archetypal problem in graph analysis. The blog http://www.vertica.com/2011/09/21/counting-triangles/ has a condemnation of Map/Reduce for the task. It also has a very inefficient implementation. Your program will output all triangles (which is different that a count of triangles) in a single map/reduce program.
+
+Identify threesomes of users that are mutual friends in a social network, i.e. A friends with B, B friends with C , and C friends with A. The output should enumerate the mutual friends for each user and avoid duplicate entries, i.e. the trio of users A, B, and C will contribute output:
+
+<A,B,C> 
+<B,A,C>   
+<C,A,B>
+This needs to be implemented in the Map/Reduce paradigm, using no auxiliary data structures and no shared data. The only files used are the inputs to the map stage. The solution will demonstrate one potential parallelism tradeoff, it will expand the data sending more data than is intuitively necessary over the network and examining the expanded data in the reducers. The expansion of data prevents random I/O (e.g., the reading of multiple friend lists by the mappers and reducers) and allows for a high degree of parallelism.
+
+The input to the Map/Reduce program is set of friend lists. Each file in the input contains the id of the user followed by a list of her/his friends. All identifiers are integer values separated by spaces and all friends in the list appear on a single line.
+
+
 4.1 Explanations for executing code on Hadoop VM (image provided by Kunal)
 1. Download input data from S3
 Configure the S3cmd by command: s3cmd --configure; Then download the data: e.g. s3cmd get --recursive s3//:friends1000/
